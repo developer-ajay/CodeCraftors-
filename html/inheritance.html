@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Inheritance Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin: 10px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        ol {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 20px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 40px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Python Inheritance Overview</h1>
+        <p>In Python, inheritance is a way to establish a relationship between classes, where a class (child or subclass) inherits attributes and methods from another class (parent or superclass). This allows for code reuse and is a key feature of object-oriented programming (OOP). Python supports several types of inheritance, each with different use cases. Here’s an overview:</p>
+
+        <h2>1. Single Inheritance</h2>
+        <p>Single inheritance occurs when a subclass inherits from only one parent class.</p>
+        <pre><code>class Animal:
+    def speak(self):
+        print("Animal makes a sound")
+
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+
+# Creating an instance of Dog
+dog = Dog()
+dog.speak()  # Inherited method from Animal
+dog.bark()   # Method from Dog
+</code></pre>
+        <p>In this case, <code>Dog</code> is inheriting from the <code>Animal</code> class.</p>
+
+        <h2>2. Multiple Inheritance</h2>
+        <p>Multiple inheritance allows a subclass to inherit from more than one parent class.</p>
+        <pre><code>class Animal:
+    def speak(self):
+        print("Animal makes a sound")
+
+class Swimmer:
+    def swim(self):
+        print("Swimming")
+
+class Fish(Animal, Swimmer):
+    pass
+
+# Creating an instance of Fish
+fish = Fish()
+fish.speak()  # Inherited from Animal
+fish.swim()   # Inherited from Swimmer
+</code></pre>
+        <p>In this example, <code>Fish</code> inherits from both <code>Animal</code> and <code>Swimmer</code>.</p>
+
+        <h2>3. Multilevel Inheritance</h2>
+        <p>Multilevel inheritance occurs when a subclass is derived from another subclass, creating a "chain" of inheritance.</p>
+        <pre><code>class Animal:
+    def speak(self):
+        print("Animal makes a sound")
+
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+
+class Puppy(Dog):
+    def whine(self):
+        print("Puppy whines")
+
+# Creating an instance of Puppy
+puppy = Puppy()
+puppy.speak()  # Inherited from Animal
+puppy.bark()   # Inherited from Dog
+puppy.whine()  # Method from Puppy
+</code></pre>
+        <p>Here, <code>Puppy</code> inherits from <code>Dog</code>, which in turn inherits from <code>Animal</code>.</p>
+
+        <h2>4. Hierarchical Inheritance</h2>
+        <p>Hierarchical inheritance occurs when multiple subclasses inherit from a single parent class.</p>
+        <pre><code>class Animal:
+    def speak(self):
+        print("Animal makes a sound")
+
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+
+class Cat(Animal):
+    def meow(self):
+        print("Cat meows")
+
+# Creating instances of Dog and Cat
+dog = Dog()
+cat = Cat()
+
+dog.speak()  # Inherited from Animal
+dog.bark()   # Method from Dog
+cat.speak()  # Inherited from Animal
+cat.meow()   # Method from Cat
+</code></pre>
+        <p>In this case, both <code>Dog</code> and <code>Cat</code> inherit from the same parent class, <code>Animal</code>.</p>
+
+        <h2>5. Hybrid Inheritance</h2>
+        <p>Hybrid inheritance is a combination of two or more types of inheritance.</p>
+        <pre><code>class Animal:
+    def speak(self):
+        print("Animal makes a sound")
+
+class Swimmer:
+    def swim(self):
+        print("Swimming")
+
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+
+class Fish(Dog, Swimmer):  # Hybrid inheritance
+    pass
+
+# Creating an instance of Fish
+fish = Fish()
+fish.speak()  # Inherited from Animal
+fish.bark()   # Inherited from Dog
+fish.swim()   # Inherited from Swimmer
+</code></pre>
+        <p>Here, <code>Fish</code> inherits from both <code>Dog</code> and <code>Swimmer</code>.</p>
+
+        <h2>6. Interface Inheritance (Abstract Base Classes)</h2>
+        <p>Python supports a concept similar to interfaces through abstract base classes (ABCs), which define methods that must be implemented by subclasses.</p>
+        <pre><code>from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    @abstractmethod
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        print("Dog barks")
+
+# Creating an instance of Dog
+dog = Dog()
+dog.speak()  # Output: Dog barks
+</code></pre>
+        <p>Here, <code>Animal</code> is an abstract class, and any subclass (like <code>Dog</code>) must implement the <code>speak()</code> method.</p>
+
+        <hr>
+
+        <h2>Summary of Types of Inheritance</h2>
+        <ol>
+            <li><strong>Single Inheritance</strong>: A subclass inherits from one parent class.</li>
+            <li><strong>Multiple Inheritance</strong>: A subclass inherits from more than one parent class.</li>
+            <li><strong>Multilevel Inheritance</strong>: A subclass inherits from a subclass (creating a chain).</li>
+            <li><strong>Hierarchical Inheritance</strong>: Multiple subclasses inherit from a single parent class.</li>
+            <li><strong>Hybrid Inheritance</strong>: A combination of two or more types of inheritance.</li>
+            <li><strong>Interface Inheritance (Abstract Base Classes)</strong>: Defining an interface using abstract base classes, ensuring subclasses implement certain methods.</li>
+        </ol>
+        <p>Each type of inheritance serves different use cases, depending on the structure and relationships between your classes.</p>
+    </div>
+</body>
+</html>

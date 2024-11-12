@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Classes in OOP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        ol {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 20px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 40px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Python Classes in Object-Oriented Programming (OOP)</h1>
+        <p>In Python, classes are a fundamental part of Object-Oriented Programming (OOP). A class is a blueprint for creating objects, which are instances of the class. Classes allow for organizing data and functionality together, making code modular and reusable. Let's dive into the key concepts and components of classes in Python.</p>
+
+        <h2>1. Defining a Class</h2>
+        <p>A class in Python is defined using the <code>class</code> keyword:</p>
+        <pre><code>class Car:
+    pass  # An empty class</code></pre>
+        <p>Here, <code>Car</code> is an empty class with no attributes or methods.</p>
+
+        <h2>2. Attributes</h2>
+        <p>Attributes are variables that belong to a class and define the properties of an object. In Python, attributes are typically defined in the <code>__init__</code> method, which is the constructor of the class.</p>
+        <pre><code>class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+
+# Creating an instance of Car
+car1 = Car("Toyota", "Camry")
+print(car1.make)   # Output: Toyota
+print(car1.model)  # Output: Camry</code></pre>
+
+        <h2>3. Methods</h2>
+        <p>Methods are functions defined within a class. The first parameter of a method is <code>self</code>, which refers to the instance calling the method.</p>
+        <pre><code>class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+
+    def display_info(self):
+        print(f"{self.make} {self.model}")
+
+# Calling a method
+car1 = Car("Toyota", "Camry")
+car1.display_info()  # Output: Toyota Camry</code></pre>
+
+        <h2>4. Constructors (<code>__init__</code> Method)</h2>
+        <p>The <code>__init__</code> method is a special method that gets called when a new object is created. It is typically used to initialize attributes.</p>
+        <pre><code>class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+# Creating an instance
+person1 = Person("Alice", 30)</code></pre>
+
+        <h2>5. Class Attributes vs Instance Attributes</h2>
+        <p>Class attributes are shared across all instances of a class, while instance attributes are specific to each instance.</p>
+        <pre><code>class Car:
+    wheels = 4  # Class attribute
+
+    def __init__(self, make, model):
+        self.make = make  # Instance attribute
+        self.model = model
+
+car1 = Car("Toyota", "Camry")
+car2 = Car("Honda", "Accord")
+
+print(car1.wheels)  # Output: 4
+print(car2.wheels)  # Output: 4</code></pre>
+
+        <h2>6. Static Methods</h2>
+        <p>Static methods are defined using the <code>@staticmethod</code> decorator. They do not take a <code>self</code> parameter and do not access or modify instance or class data. They are utility methods related to the class.</p>
+        <pre><code>class MathUtility:
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+result = MathUtility.add(5, 10)
+print(result)  # Output: 15</code></pre>
+
+        <h2>7. Class Methods</h2>
+        <p>Class methods are defined with the <code>@classmethod</code> decorator and take <code>cls</code> as the first parameter, allowing them to modify class state that applies across all instances.</p>
+        <pre><code>class Car:
+    count = 0  # Class attribute
+
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+        Car.count += 1
+
+    @classmethod
+    def total_cars(cls):
+        return cls.count
+
+# Creating instances
+car1 = Car("Toyota", "Camry")
+car2 = Car("Honda", "Accord")
+print(Car.total_cars())  # Output: 2</code></pre>
+
+        <h2>8. Inheritance</h2>
+        <p>Inheritance allows a class to inherit attributes and methods from another class.</p>
+        <pre><code>class Animal:
+    def speak(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    def bark(self):
+        print("Dog barks")
+
+dog = Dog()
+dog.speak()  # Inherited method from Animal
+dog.bark()   # Method from Dog</code></pre>
+
+        <h2>9. Encapsulation</h2>
+        <p>Encapsulation restricts direct access to an object's data and is often implemented using private attributes (prefix with <code>_</code> or <code>__</code>).</p>
+        <pre><code>class BankAccount:
+    def __init__(self, account_holder, balance=0):
+        self.account_holder = account_holder  # Public attribute
+        self.__balance = balance  # Private attribute (encapsulated)
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"${amount} deposited successfully.")
+        else:
+            print("Deposit amount should be positive.")
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            print(f"${amount} withdrawn successfully.")
+        else:
+            print("Invalid withdrawal amount or insufficient balance.")
+
+    def get_balance(self):
+        return self.__balance
+
+# Usage
+account = BankAccount("Alice")
+account.deposit(100)
+print("Current balance:", account.get_balance())
+account.withdraw(50)
+print("Updated balance:", account.get_balance())
+
+# Trying to access the private attribute directly will cause an error
+# print(account.__balance) # This will raise an AttributeError
+</code></pre>
+
+        <h2>10. Polymorphism</h2>
+        <p>Polymorphism allows for using a single interface to represent different underlying forms (data types). Python achieves polymorphism through method overriding.</p>
+        <pre><code>class Animal:
+    def speak(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    def speak(self):
+        print("Bark")
+
+class Cat(Animal):
+    def speak(self):
+        print("Meow")
+
+animals = [Dog(), Cat()]
+for animal in animals:
+    animal.speak()  # Outputs: Bark, Meow</code></pre>
+
+        <h2>11. Special Methods</h2>
+        <p>Special methods (also known as "magic methods") start and end with double underscores, like <code>__str__</code> and <code>__repr__</code>. These provide default behaviors for instances.</p>
+        <pre><code>class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+    def __str__(self):
+        return f"'{self.title}' by {self.author}"
+
+book = Book("1984", "George Orwell")
+print(book)  # Output: '1984' by George Orwell</code></pre>
+
+        <hr>
+
+        <h2>Summary of Class Components</h2>
+        <ol>
+            <li><strong>Attributes</strong>: Define properties of an object.</li>
+            <li><strong>Methods</strong>: Functions within a class.</li>
+            <li><strong>Static Methods</strong>: Utility methods that do not access class or instance data.</li>
+            <li><strong>Class Methods</strong>: Operate on class data across all instances.</li>
+            <li><strong>Inheritance</strong>: Allows a class to inherit from another class.</li>
+            <li><strong>Encapsulation</strong>: Restrict direct access to an object's data.</li>
+            <li><strong>Polymorphism</strong>: Use a unified interface for different data types.</li>
+            <li><strong>Special Methods</strong>: Define default behaviors (e.g., <code>__str__</code>, <code>__repr__</code>).</li>
+        </ol>
+        <p>Understanding these concepts provides a solid foundation in Python's object-oriented programming model, making it easier to design and organize complex systems.</p>
+    </div>
+</body>
+</html>

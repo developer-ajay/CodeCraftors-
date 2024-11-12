@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polymorphism in Python</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        code {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        ol {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 20px;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 40px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Polymorphism in Python</h1>
+        <p>Polymorphism is a key concept in object-oriented programming (OOP) that allows objects of different classes
+            to be treated as objects of a common superclass. It enables a single function, method, or operator to
+            operate on different types of objects, promoting flexibility and code reusability.</p>
+
+        <h2>1. What is Polymorphism?</h2>
+        <p>Polymorphism is derived from the Greek words "poly" (meaning "many") and "morph" (meaning "forms"). In
+            Python, polymorphism allows objects of different classes to respond to the same method call in their own
+            unique way, based on their class.</p>
+
+        <h2>2. Types of Polymorphism in Python</h2>
+        <p>Python supports two primary types of polymorphism:</p>
+        <ol>
+            <li><strong>Compile-time Polymorphism</strong> (also known as method overloading): Not natively supported in
+                Python, but can be implemented in a limited way using default arguments.</li>
+            <li><strong>Runtime Polymorphism</strong> (also known as method overriding): Supported through inheritance,
+                where subclasses override methods in a superclass.</li>
+        </ol>
+
+        <h2>3. Method Overriding</h2>
+        <p>Method overriding is an example of runtime polymorphism, where a subclass provides a specific implementation
+            of a method that is already defined in its superclass. The overridden method in the subclass is called, even
+            if the object is of the superclass type.</p>
+        <pre><code>class Animal:
+    def speak(self):
+        return "Some generic animal sound"
+
+class Dog(Animal):
+    def speak(self):
+        return "Bark!"
+
+class Cat(Animal):
+    def speak(self):
+        return "Meow!"
+
+# Using polymorphism
+animals = [Dog(), Cat()]
+for animal in animals:
+    print(animal.speak())  # Output: Bark!, Meow!</code></pre>
+
+        <h2>4. Using <code>super()</code> in Polymorphism</h2>
+        <p>The <code>super()</code> function allows subclasses to access and extend the behavior of superclass methods.
+            This is especially useful in polymorphism when a subclass wants to add to or customize a method from its
+            superclass rather than replacing it completely.</p>
+        <pre><code>class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        return f"{self.name} makes a sound"
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)  # Calls Animal's __init__
+        self.breed = breed
+
+    def speak(self):
+        parent_speak = super().speak()  # Calls Animal's speak
+        return f"{parent_speak} and barks"
+
+# Using super() in subclass method
+dog = Dog("Buddy", "Golden Retriever")
+print(dog.speak())  # Output: Buddy makes a sound and barks</code></pre>
+
+        <h2>5. Operator Overloading</h2>
+        <p>Python allows us to redefine the functionality of operators for user-defined classes through special methods
+            (also called "magic methods"). This is known as operator overloading.</p>
+        <pre><code>class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __str__(self):
+        return f"({self.x}, {self.y})"
+
+# Overloading + operator
+v1 = Vector(2, 3)
+v2 = Vector(5, 7)
+print(v1 + v2)  # Output: (7, 10)</code></pre>
+
+        <h2>6. Polymorphism with Functions and Objects</h2>
+        <p>Functions in Python can take any object that meets the interface requirements (known as "duck typing").
+            Python uses dynamic typing, which means that as long as an object has the required methods or attributes, it
+            can be passed to a function.</p>
+        <pre><code>class Bird:
+    def fly(self):
+        return "Flying in the sky"
+
+class Airplane:
+    def fly(self):
+        return "Flying through the clouds"
+
+def start_flying(obj):
+    print(obj.fly())
+
+# Both classes have fly() method
+bird = Bird()
+plane = Airplane()
+start_flying(bird)   # Output: Flying in the sky
+start_flying(plane)  # Output: Flying through the clouds</code></pre>
+        <h2>7. Polymorphism with Inheritance and Subclasses</h2>
+        <p>Inheritance allows subclasses to inherit properties and methods from a superclass. Through polymorphism,
+            subclasses can override or extend the functionality of inherited methods.</p>
+        <pre><code>class Shape:
+def area(self):
+pass
+
+class Rectangle(Shape):
+def __init__(self, width, height):
+self.width = width
+self.height = height
+
+def area(self):
+return self.width * self.height
+
+class Circle(Shape):
+def __init__(self, radius):
+self.radius = radius
+
+def area(self):
+return 3.14 * (self.radius ** 2)
+
+# Calculating areas for different shapes
+shapes = [Rectangle(4, 5), Circle(3)]
+for shape in shapes:
+print(f"Area: {shape.area()}")  # Output: Area of Rectangle, Area of Circle</code></pre>
+
+
+        <h2>8. Abstract Base Classes (ABCs) and Polymorphism</h2>
+        <p>Abstract base classes (ABCs) enforce that subclasses implement certain methods, ensuring polymorphism. ABCs
+            can be defined using the <code>abc</code> module.</p>
+        <pre><code>from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    @abstractmethod
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        return "Bark!"
+
+class Cat(Animal):
+    def speak(self):
+        return "Meow!"
+
+# Abstract base class enforces polymorphic behavior
+animals = [Dog(), Cat()]
+for animal in animals:
+    print(animal.speak())  # Output: Bark!, Meow!</code></pre>
+
+        <h2>8. Real-world Example of Polymorphism</h2>
+        <p>Consider an e-commerce application where different types of products require the same interface for
+            calculating discounts. Each product type can implement its own discount calculation logic.</p>
+        <pre><code>class Product:
+def calculate_discount(self):
+    pass
+
+class Electronics(Product):
+def calculate_discount(self):
+    return "20% discount on electronics"
+
+class Clothing(Product):
+def calculate_discount(self):
+    return "10% discount on clothing"
+
+# Applying polymorphism
+products = [Electronics(), Clothing()]
+for product in products:
+print(product.calculate_discount())  # Output: discount details for each product type</code></pre>
+
+        <hr>
+
+        <h2>Summary of Polymorphism in Python</h2>
+        <ol>
+            <li><strong>Method Overriding</strong>: Allows subclasses to provide specific implementations for inherited
+                methods.</li>
+            <li><strong>Operator Overloading</strong>: Redefines the behavior of operators for user-defined classes
+                using magic methods (e.g., <code>__add__</code>, <code>__str__</code>).</li>
+            <li><strong>Using <code>super()</code></strong>: Allows subclasses to access and extend methods from their
+                superclass.</li>
+            <li><strong>Polymorphism with Functions and Objects</strong>: Functions can operate on any object that meets
+                interface requirements.</li>
+            <li><strong>Polymorphism with Inheritance</strong>: Inherited classes can override methods, enabling
+                flexible use of base and subclass methods.</li>
+            <li><strong>Abstract Base Classes</strong>: Enforce polymorphic behavior by ensuring subclasses implement
+                specific methods.</li>
+        </ol>
+        <p>Understanding polymorphism, especially with <code>super()</code>, allows developers to write flexible,
+            reusable, and modular code, making it easier to manage complex systems in Python.</p>
+    </div>
+</body>
+
+</html>
