@@ -1,0 +1,20 @@
+1. What is a class in Python, and how is it defined in code?
+
+A class in Python is a blueprint for creating objects, 
+representing a collection of attributes and methods that define the behavior 
+and properties of the objects. It is defined using the `class` keyword 
+followed by the class name and a colon. Inside the class, methods and attributes are 
+defined to specify the functionality and characteristics of the objects. Here is a simple example:
+
+```python
+class Car:
+    def __init__(self, make, model):
+        self.make = make
+        self.model = model
+
+    def display_info(self):
+        print(f"{self.make} {self.model}")
+
+# Creating an instance of Car
+car1 = Car("Toyota", "Maruti Suzuki")
+car1.display_info()  # Output: Toyota Camry
