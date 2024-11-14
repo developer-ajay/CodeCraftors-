@@ -5,6 +5,6 @@ print(f"before swap {a},{b}")
 
 c=b
 b=a
-c=a
+c=b
 print(f"after swapping {a},{b}")
 
