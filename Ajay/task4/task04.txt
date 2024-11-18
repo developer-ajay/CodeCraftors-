@@ -16,5 +16,23 @@ class Car:
         print(f"{self.make} {self.model}")
 
 # Creating an instance of Car
-car1 = Car("Toyota", "Maruti Suzuki")
-car1.display_info()  # Output: Toyota Camry
+car1 = Car("Toyota", "Suzuki")
+car1.display_info()  # Output: Toyota Suzuki
+
+2. Explain the difference between instance attributes and class attributes in Python. Provide examples.
+Instance attributes are attributes that are local to the instance, it will change with respect to every instance.
+Attributes shared across all instances of a class. They belong to the class rather than any specific instance.
+
+
+
+
+
+
+3. What role does the `__init__` method serve in a Python class? How is it used to initialize attributes?
+4. Describe the purpose of the `self` parameter in class methods and explain its importance.
+5. What is the difference between static methods and class methods in Python? How are they defined?
+6. How does inheritance work in Python, and why is it useful in object-oriented programming?
+7. Define encapsulation in Python. How is encapsulation implemented in Python classes, and what benefits does it provide?
+8. Explain the concept of polymorphism in Python. How does Python support polymorphism through method overriding?
+9. What are special methods (also known as "magic methods") in Python, and why are they used? Give examples of common special methods.
+10. Why is it beneficial to use object-oriented programming (OOP) in Python? Discuss how classes, methods, and inheritance contribute to code modularity and reusability.
